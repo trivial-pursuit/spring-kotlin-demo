@@ -2,7 +2,7 @@
 
 
 This is a demo application for the *"Application.kt - Spring Boot 2 with Kotlin
-"* presentation at the [inovex Meetup](https://www.meetup.com/de-DE/inovex-karlsruhe/events/249381296/).
+"* presentation at the [inovex Meetup](https://www.meetup.com/inovex-munich/events/257926717/).
 
 
 
