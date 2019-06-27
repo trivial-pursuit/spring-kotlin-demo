@@ -34,12 +34,6 @@ resource "aws_ecs_service" "guestbook" {
     subnets          = ["${data.aws_subnet_ids.default.ids}"]
     assign_public_ip = true
   }
-
-  load_balancer {
-#    target_group_arn = "${aws_lb_target_group.service.id}"
-    container_name   = "guestbook"
-    container_port   = "8080"
-  }
 }
 
 data "template_file" "container_definition" {
