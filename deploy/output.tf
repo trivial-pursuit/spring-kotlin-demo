@@ -2,6 +2,6 @@ output "db" {
   value = "${aws_docdb_cluster.guestbook-db-cluster.endpoint}"
 }
 
-output "alb" {
-  value = "${aws_lb.global-alb.dns_name}"
+output "home" {
+  value = "http://${aws_lb.global-alb.dns_name}/index.html"
 }
