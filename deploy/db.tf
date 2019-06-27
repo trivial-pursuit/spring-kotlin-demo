@@ -19,7 +19,7 @@ resource "aws_docdb_cluster" "guestbook-db-cluster" {
   cluster_identifier      = "guestbook-db-cluster"
   engine                  = "docdb"
   master_username         = "foo"
-  master_password         = "bar"
+  master_password         = "foobar11"
   db_cluster_parameter_group_name = "${aws_docdb_cluster_parameter_group.guestbook-db-parameter-group.name}"
   vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
 }
