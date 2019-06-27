@@ -61,10 +61,10 @@ resource "aws_lb_target_group" "guestbook" {
   health_check {
     path                = "/actuator/health"
     matcher             = "200"
-    interval            = 30
+    interval            = 60
     healthy_threshold   = 3
     unhealthy_threshold = 3
-    timeout             = 2
+    timeout             = 10
   }
 }
 
