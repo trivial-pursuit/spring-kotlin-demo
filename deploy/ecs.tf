@@ -78,7 +78,7 @@ resource "aws_lb_listener_rule" "http" {
 
   condition {
     field  = "path-pattern"
-    values = ["/guestbook/*"]
+    values = ["/*"]
   }
 }
 
