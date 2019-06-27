@@ -47,7 +47,7 @@ data "template_file" "container_definition" {
 [
   {
     "name": "guestbook",
-    "image": "291404320502.dkr.ecr.eu-central-1.amazonaws.com/guestbook:1",
+    "image": "291404320502.dkr.ecr.eu-central-1.amazonaws.com/guestbook:0.0.1-SNAPSHOT",
     "essential": true,
     "portMappings": [
       {

@@ -5,11 +5,13 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+                maven { url "https://plugins.gradle.org/m2/" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+		classpath("gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:1.2.0")
 	}
 }
 
@@ -18,6 +20,7 @@ apply plugin: 'kotlin-spring'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.google.cloud.tools.jib'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -39,7 +42,6 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -48,3 +50,19 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+jib {
+	to {
+		image = "291404320502.dkr.ecr.eu-central-1.amazonaws.com/guestbook"
+		tags = [project.version]
+	}
+}
+
+task awsECRLogin(type: Exec) {
+	standardInput = System.in
+	executable = "sh"
+	args = ["-c", "aws ecr get-login --region eu-central-1 --no-include-email | sh -"]
+}
+
+tasks.getByPath("jib").dependsOn("awsECRLogin")
+
