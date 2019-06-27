@@ -90,7 +90,7 @@ resource "aws_ecs_service" "guestbook" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups  = ["${data.aws_security_group.default.id}"]
+    security_groups  = ["${aws_security_group.global-alb-access.id}"]
     subnets          = ["${data.aws_subnet_ids.default.ids}"]
     assign_public_ip = true
   }
