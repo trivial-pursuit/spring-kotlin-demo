@@ -117,7 +117,9 @@ data "template_file" "container_definition" {
         "hostPort": 8080
       }
     ],
-    "environment": [],
+    "environment": [
+          {"name":"SPRING_DATA_MONGODB_HOST", "value": "${aws_docdb_cluster.guestbook-db-cluster.endpoint}"}
+    ],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
