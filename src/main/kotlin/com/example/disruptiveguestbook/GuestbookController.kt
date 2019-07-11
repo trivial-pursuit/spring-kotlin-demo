@@ -1,41 +1,40 @@
 package com.example.disruptiveguestbook
 
+import io.micronaut.http.HttpResponse
+import io.micronaut.http.HttpStatus
+import io.micronaut.http.annotation.Controller
+import io.micronaut.http.annotation.Get
+import io.micronaut.http.annotation.Post
 import org.slf4j.LoggerFactory
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import javax.inject.Inject
 
-@RestController
+@Controller
 class GuestbookController(
-    private val messageRepository: MessageRepository,
-    private val giphyService: GiphyService
+        @Inject private val messageRepository: MessageRepository,
+        @Inject private val giphyService: GiphyService
 ) {
 
     companion object {
         private val log = LoggerFactory.getLogger(GuestbookController::class.java)
     }
 
-    @GetMapping("/messages")
-    fun getMessages(@RequestParam user: String?): List<Message> {
+    @Get("/messages")
+    fun getMessages(user: String?): List<Message> {
         return when (user) {
             null -> messageRepository.findAll()
             else -> messageRepository.findByFromUser(user)
         }
     }
 
-    @PostMapping("/messages")
-    private fun addMessage(@RequestBody message: CreateMessageDto): ResponseEntity<CreateMessageDto> {
+    @Post("/messages")
+    private fun addMessage(message: CreateMessageDto): HttpResponse<CreateMessageDto> {
 
         val hashtag = extractHashtag(message.text)
-        val giphyLink= hashtag?.let { giphyService.findUrlForTag(it) }
+        val giphyLink = hashtag?.let { giphyService.findUrlForTag(it) }
 
         messageRepository.save(Message(fromUser = message.fromUser, text = message.text, giphyLink = giphyLink))
         log.info("Message create {}", message)
-        return ResponseEntity(message, HttpStatus.CREATED)
+        return HttpResponse.created(message)
     }
 
     private fun extractHashtag(text: String): String? {

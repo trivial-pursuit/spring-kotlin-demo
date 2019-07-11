@@ -67,6 +67,8 @@ dependencies {
 
 run.classpath += configurations.developmentOnly
 
+mainClassName = "com.example.disruptiveguestbook.DisruptiveGuestbookApplikationKt"
+
 jib {
 	to {
 		image = "291404320502.dkr.ecr.eu-central-1.amazonaws.com/guestbook"

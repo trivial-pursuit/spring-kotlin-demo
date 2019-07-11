@@ -1,11 +1,10 @@
 package com.example.disruptiveguestbook
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import org.springframework.boot.web.client.RestTemplateBuilder
-import org.springframework.stereotype.Service
-import org.springframework.web.client.getForEntity
 
-@Service
+import javax.inject.Singleton
+
+@Singleton
 class GiphyService(
     templateBuilder: RestTemplateBuilder,
     private val giphyProperties: GiphyProperties

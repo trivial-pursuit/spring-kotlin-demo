@@ -1,11 +1,9 @@
 package com.example.disruptiveguestbook
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import io.micronaut.runtime.Micronaut
 
-@SpringBootApplication
 class DisruptiveGuestbookApplication
 
 fun main(args: Array<String>) {
-    runApplication<DisruptiveGuestbookApplication>(*args)
+    Micronaut.run(DisruptiveGuestbookApplication::class.java)
 }
