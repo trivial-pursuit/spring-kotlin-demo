@@ -52,12 +52,12 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	compile("io.micronaut:micronaut-http-client:1.1.1")
-	compile("io.micronaut.aws:micronaut-function-aws-api-proxy:1.1.1")
 	compile("io.micronaut:micronaut-runtime:1.1.1")
 	compile("io.micronaut:micronaut-router:1.1.1")
 	compile("io.micronaut:micronaut-function:1.1.1")
 	compile("io.micronaut:micronaut-security:1.1.1")
 	compile("io.micronaut:micronaut-validation:1.1.1")
+	compile("io.micronaut.configuration:micronaut-mongo-reactive:1.1.0")
 
 	kapt("io.micronaut:micronaut-inject-java:1.1.1")
 	kapt("io.micronaut:micronaut-validation:1.1.1")
