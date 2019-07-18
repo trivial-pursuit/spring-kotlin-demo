@@ -3,13 +3,14 @@ package com.example.disruptiveguestbook
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.client.RxHttpClient
+import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.uri.UriTemplate
 import javax.inject.Singleton
 
 @Singleton
 class GiphyService(
-    private val httpClient: RxHttpClient,
-    private val giphyProperties: GiphyProperties
+        @Client("\${giphy.url}") private val httpClient: RxHttpClient,
+        private val giphyProperties: GiphyProperties
 ) {
 
     fun findUrlForTag(tag: String): String? {
