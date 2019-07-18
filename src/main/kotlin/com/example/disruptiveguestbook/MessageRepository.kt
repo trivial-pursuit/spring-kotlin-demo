@@ -6,9 +6,9 @@ import com.mongodb.reactivestreams.client.MongoCollection
 import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
+import javax.inject.Singleton
 
-
-
+@Singleton
 class MessageRepository(
         @Inject private val mongoClient: MongoClient
 ) {
