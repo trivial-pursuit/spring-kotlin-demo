@@ -58,6 +58,7 @@ dependencies {
 	compile("io.micronaut:micronaut-security:1.1.1")
 	compile("io.micronaut:micronaut-validation:1.1.1")
 	compile("io.micronaut.configuration:micronaut-mongo-reactive:1.1.0")
+	compile("org.slf4j:slf4j-simple:1.6.1")
 
 	kapt("io.micronaut:micronaut-inject-java:1.1.1")
 	kapt("io.micronaut:micronaut-validation:1.1.1")
