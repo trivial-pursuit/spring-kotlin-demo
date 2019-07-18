@@ -1,0 +1,12 @@
+giphy:
+    apikey: your-api-key
+    url: https://api.giphy.com/v1/gifs
+micronaut:
+    router:
+        static-resources:
+            default:
+                enabled: true
+                mapping: "/**"
+                paths: "classpath:static"
+mongodb:
+    uri: mongodb://foo:foobar11@${SPRING_DATA_MONGODB_HOST:localhost}:27017
