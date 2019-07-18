@@ -67,7 +67,7 @@ dependencies {
 
 run.classpath += configurations.developmentOnly
 
-mainClassName = "com.example.disruptiveguestbook.DisruptiveGuestbookApplikationKt"
+mainClassName = "com.example.disruptiveguestbook.DisruptiveGuestbookApplicationKt"
 
 jib {
 	to {
