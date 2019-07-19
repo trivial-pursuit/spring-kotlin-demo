@@ -59,7 +59,7 @@ resource "aws_lb_target_group" "guestbook" {
   deregistration_delay = "30"
 
   health_check {
-    path                = "/actuator/health"
+    path                = "/health"
     matcher             = "200"
     interval            = 30
     healthy_threshold   = 3
