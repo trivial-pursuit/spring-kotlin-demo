@@ -1,43 +1,35 @@
 package com.example.disruptiveguestbook
 
-import com.mongodb.client.model.Filters.eq
-import com.mongodb.reactivestreams.client.MongoClient
-import com.mongodb.reactivestreams.client.MongoCollection
-import io.reactivex.Flowable
-import io.reactivex.Single
-import javax.inject.Inject
+import com.mongodb.MongoClientURI
+import com.mongodb.client.MongoCollection
+import io.micronaut.context.annotation.Value
+import org.litote.kmongo.KMongo
+import org.litote.kmongo.eq
 import javax.inject.Singleton
 
 @Singleton
 class MessageRepository(
-        @Inject private val mongoClient: MongoClient
+        @Value("\${mongodb.uri}") private val mongoClientUri: String
 ) {
 
+    private val mongoClient = KMongo.createClient(MongoClientURI(mongoClientUri))
+
     fun findAll(): List<Message> {
-        return Flowable
-                .fromPublisher(
-                        getCollection()
-                                .find()
-                ).toList().blockingGet()
+        return getCollection().find().toList()
     }
 
     fun findByFromUser(user: String): List<Message> {
-        return Flowable
-                .fromPublisher(
-                        getCollection()
-                        .find(eq("fromUser", user))
-        ).toList().blockingGet()
+        return getCollection().find(Message::fromUser eq user).toList()
     }
 
-    fun save(message: Message): Message{
-        return Single
-                .fromPublisher(getCollection()
-                        .insertOne(message)).map { message }.blockingGet()
+    fun save(message: Message): Message {
+        getCollection().insertOne(message)
+        return message
     }
 
     private fun getCollection(): MongoCollection<Message> {
         return mongoClient
                 .getDatabase("test")
-                .getCollection("message", Message::class.java)
+                .getCollection<Message>("message", Message::class.java)
     }
 }

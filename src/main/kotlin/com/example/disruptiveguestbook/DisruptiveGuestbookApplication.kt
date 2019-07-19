@@ -7,3 +7,4 @@ class DisruptiveGuestbookApplication
 fun main(args: Array<String>) {
     Micronaut.run(DisruptiveGuestbookApplication::class.java)
 }
+

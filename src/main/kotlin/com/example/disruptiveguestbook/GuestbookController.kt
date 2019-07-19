@@ -1,7 +1,6 @@
 package com.example.disruptiveguestbook
 
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
@@ -27,7 +26,7 @@ class GuestbookController(
     }
 
     @Post("/messages")
-    private fun addMessage(message: CreateMessageDto): HttpResponse<CreateMessageDto> {
+    fun addMessage(message: CreateMessageDto): HttpResponse<CreateMessageDto> {
 
         val hashtag = extractHashtag(message.text)
         val giphyLink = hashtag?.let { giphyService.findUrlForTag(it) }
