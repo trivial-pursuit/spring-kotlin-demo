@@ -38,6 +38,8 @@ class MessageRepository {
     }
 
     fun save(message: Message): Message {
+        message.id = UUID.randomUUID().toString()
+        message.createdAt = Date()
         mapper.save(message)
 
         return message
