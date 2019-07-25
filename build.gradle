@@ -1,18 +1,18 @@
 buildscript {
-	ext {
-		kotlinVersion = '1.3.11'
-		springBootVersion = '2.1.2.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-                maven { url "https://plugins.gradle.org/m2/" }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
-		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
-		classpath("gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:1.2.0")
-	}
+    ext {
+        kotlinVersion = '1.3.11'
+        springBootVersion = '2.1.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath("gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:1.2.0")
+    }
 }
 
 apply plugin: 'kotlin'
@@ -26,43 +26,43 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 compileKotlin {
-	kotlinOptions {
-		freeCompilerArgs = ["-Xjsr305=strict"]
-		jvmTarget = "1.8"
-	}
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
 }
 compileTestKotlin {
-	kotlinOptions {
-		freeCompilerArgs = ["-Xjsr305=strict"]
-		jvmTarget = "1.8"
-	}
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('com.fasterxml.jackson.module:jackson-module-kotlin')
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	compile("org.jetbrains.kotlin:kotlin-reflect")
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 jib {
-	to {
-		image = "291404320502.dkr.ecr.eu-central-1.amazonaws.com/guestbook"
-		tags = [project.version]
-	}
+    to {
+        image = "291404320502.dkr.ecr.eu-central-1.amazonaws.com/guestbook"
+        tags = [project.version]
+    }
 }
 
 task awsECRLogin(type: Exec) {
-	standardInput = System.in
-	executable = "sh"
-	args = ["-c", "aws ecr get-login --region eu-central-1 --no-include-email | sh -"]
+    standardInput = System.in
+    executable = "sh"
+    args = ["-c", "aws ecr get-login --region eu-central-1 --no-include-email | sh -"]
 }
 
 tasks.getByPath("jib").dependsOn("awsECRLogin")
