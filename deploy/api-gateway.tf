@@ -81,7 +81,3 @@ resource "aws_api_gateway_deployment" "guestbook-api-deployment-default" {
   rest_api_id = "${aws_api_gateway_rest_api.guestbook-api.id}"
   stage_name  = "default"
 }
-
-output "invoke_url" {
-  value = "${aws_api_gateway_deployment.guestbook-api-deployment-default.invoke_url}"
-}
