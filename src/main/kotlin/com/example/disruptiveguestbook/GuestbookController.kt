@@ -20,8 +20,8 @@ class GuestbookController(
     @Get("/messages")
     fun getMessages(user: String?): List<Message> {
         return when (user) {
-            null -> messageRepository.findAll()
-            else -> messageRepository.findByFromUser(user)
+            null -> messageRepository.findAll().sortedBy { m -> m.createdAt }
+            else -> messageRepository.findByFromUser(user).sortedBy { m -> m.createdAt }
         }
     }
 
