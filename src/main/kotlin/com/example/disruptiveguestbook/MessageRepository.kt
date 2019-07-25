@@ -1,35 +1,45 @@
 package com.example.disruptiveguestbook
 
-import com.mongodb.MongoClientURI
-import com.mongodb.client.MongoCollection
-import io.micronaut.context.annotation.Value
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.eq
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression
+import com.amazonaws.services.dynamodbv2.model.AttributeValue
+import java.util.*
+import javax.annotation.PostConstruct
 import javax.inject.Singleton
 
 @Singleton
-class MessageRepository(
-        @Value("\${mongodb.uri}") private val mongoClientUri: String
-) {
+class MessageRepository {
 
-    private val mongoClient = KMongo.createClient(MongoClientURI(mongoClientUri))
+    private lateinit var client: AmazonDynamoDB
+    private lateinit var mapper: DynamoDBMapper
+
+    @PostConstruct
+    fun init() {
+        client = AmazonDynamoDBClientBuilder.standard().withRegion("eu-central-1").build()
+        mapper = DynamoDBMapper(client)
+    }
 
     fun findAll(): List<Message> {
-        return getCollection().find().toList()
+        return mapper.scan(Message::class.java, DynamoDBScanExpression())
     }
 
     fun findByFromUser(user: String): List<Message> {
-        return getCollection().find(Message::fromUser eq user).toList()
+        val eav = HashMap<String, AttributeValue>()
+        eav[":fromUser"] = AttributeValue().withS(user)
+
+        val scanExpression = DynamoDBScanExpression()
+                .withFilterExpression("fromUser = :fromUser")
+                .withExpressionAttributeValues(eav)
+                .withIndexName("FromUserIndex")
+
+        return mapper.scan(Message::class.java, scanExpression)
     }
 
     fun save(message: Message): Message {
-        getCollection().insertOne(message)
-        return message
-    }
+        mapper.save(message)
 
-    private fun getCollection(): MongoCollection<Message> {
-        return mongoClient
-                .getDatabase("test")
-                .getCollection<Message>("message", Message::class.java)
+        return message
     }
 }

@@ -8,5 +8,3 @@ micronaut:
                 enabled: true
                 mapping: "/**"
                 paths: "classpath:static"
-mongodb:
-    uri: mongodb://foo:foobar11@${SPRING_DATA_MONGODB_HOST:localhost}:27017

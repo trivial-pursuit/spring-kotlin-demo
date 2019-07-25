@@ -31,7 +31,8 @@ resource "aws_iam_role_policy" "guestbook-lambda-policy" {
               "Action": [
                   "logs:CreateLogGroup",
                   "logs:CreateLogStream",
-                  "logs:PutLogEvents"
+                  "logs:PutLogEvents",
+                  "dynamodb:*"
               ],
               "Resource": "*"
           }
@@ -49,10 +50,4 @@ resource "aws_lambda_function" "guestbook-lambda" {
   runtime          = "java8"
   timeout          = 15
   memory_size      = 2048
-
-  environment {
-    variables = {
-      SPRING_DATA_MONGODB_HOST = "${aws_docdb_cluster.guestbook-db-cluster.endpoint}"
-    }
-  }
 }

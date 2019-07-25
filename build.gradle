@@ -56,10 +56,9 @@ dependencies {
     compile("io.micronaut:micronaut-security:1.1.1")
     compile("io.micronaut:micronaut-validation:1.1.1")
     compile("io.micronaut:micronaut-management:1.1.4")
-    compile("io.micronaut.configuration:micronaut-mongo-reactive:1.1.0")
+    compile("com.amazonaws:aws-java-sdk-dynamodb:1.11.551")
     compile("io.micronaut.aws:micronaut-function-aws-api-proxy:1.1.1")
     compile("org.slf4j:slf4j-simple:1.8+")
-    compile("org.litote.kmongo:kmongo:3.10.2")
     compile("io.micronaut:micronaut-http-server-netty:1.1.1")
 
     kapt("io.micronaut:micronaut-inject-java:1.1.1")
