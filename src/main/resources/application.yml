@@ -2,6 +2,9 @@ giphy:
     apikey: your-api-key
     url: https://api.giphy.com/v1/gifs
 micronaut:
+    server:
+        cors:
+            enabled: true
     router:
         static-resources:
             default:
