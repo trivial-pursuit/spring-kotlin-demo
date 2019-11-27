@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "guestbook" {
-  bucket = "tbayer-guestbook"
+  bucket = "tbayer-guestbook-static"
   acl    = "public-read"
   policy = <<EOF
 {
@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "guestbook" {
         "Effect":"Allow",
 	  "Principal": "*",
       "Action":["s3:GetObject"],
-      "Resource":["arn:aws:s3:::tbayer-guestbook/*"
+      "Resource":["arn:aws:s3:::tbayer-guestbook-static/*"
       ]
     }
   ]
