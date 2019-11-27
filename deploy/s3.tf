@@ -30,6 +30,7 @@ data "template_file" "index-template" {
 resource "aws_s3_bucket_object" "index" {
   bucket = "${aws_s3_bucket.guestbook.bucket}"
   key    = "index.html"
+  acl    = "public-read"
   content = "${data.template_file.index-template.rendered}"
   content_type = "text/html"
 }
