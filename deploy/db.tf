@@ -1,7 +1,7 @@
 resource "aws_dynamodb_table" "guestbook" {
-  name           = "guestbook"
-  billing_mode   = "PAY_PER_REQUEST"
-  hash_key       = "id"
+  name         = "guestbook"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "id"
 
   attribute {
     name = "id"
@@ -14,11 +14,9 @@ resource "aws_dynamodb_table" "guestbook" {
   }
 
   global_secondary_index {
-    name               = "FromUserIndex"
-    hash_key           = "fromUser"
-    projection_type    = "ALL"
+    name            = "FromUserIndex"
+    hash_key        = "fromUser"
+    projection_type = "ALL"
   }
 }
-
-
 

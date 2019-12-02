@@ -3,5 +3,6 @@ output "home" {
 }
 
 output "api-endpoint" {
-  value = "${aws_api_gateway_deployment.guestbook-api-deployment-default.invoke_url}"
+  value = aws_api_gateway_deployment.guestbook-api-deployment-default.invoke_url
 }
+
