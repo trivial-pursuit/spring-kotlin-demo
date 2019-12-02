@@ -2,6 +2,8 @@ giphy:
     apikey: your-api-key
     url: https://api.giphy.com/v1/gifs
 micronaut:
+    application:
+        name: disruptive-guestbook
     server:
         cors:
             enabled: true
