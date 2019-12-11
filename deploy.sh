@@ -1,7 +1,7 @@
 #!/bin/sh
 docker build . -t disruptive-guestbook
-mkdir -p build
-docker run --rm --entrypoint cat disruptive-guestbook  /home/application/function.zip > build/function.zip
+mkdir -p build/distributions
+docker run --rm --entrypoint cat disruptive-guestbook  /home/application/function.zip > build/distributions/function.zip
 
 # check for role
 ROLE_NAME=lambda-basic-role
@@ -15,5 +15,5 @@ if [ "${ROLE_ARN}" == "" ]; then
 fi
 
 aws lambda create-function --function-name disruptive-guestbook \
---zip-file fileb://build/function.zip --handler function.handler --runtime provided \
+--zip-file fileb://build/distributions/function.zip --handler function.handler --runtime provided \
 --role ${ROLE_ARN}

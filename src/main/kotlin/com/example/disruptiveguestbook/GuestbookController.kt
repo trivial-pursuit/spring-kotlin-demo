@@ -19,6 +19,8 @@ class GuestbookController(
 
     @Get("/messages")
     fun getMessages(user: String?): List<Message> {
+        log.info("Retrieving messages")
+
         return when (user) {
             null -> messageRepository.findAll().sortedBy { m -> m.createdAt }
             else -> messageRepository.findByFromUser(user).sortedBy { m -> m.createdAt }
@@ -44,5 +46,4 @@ class GuestbookController(
             false -> hashtag
         }
     }
-
 }

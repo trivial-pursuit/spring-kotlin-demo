@@ -18,7 +18,7 @@ class Handler : RequestStreamHandler {
 
         init {
             try {
-                handler = MicronautLambdaContainerHandler.getAwsProxyHandler()
+                handler = MicronautLambdaContainerHandler()
             } catch (e: ContainerInitializationException) {
                 // if we fail here. We re-throw the exception to force another cold start
                 e.printStackTrace()
