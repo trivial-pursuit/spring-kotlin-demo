@@ -44,14 +44,14 @@ EOF
 }
 
 resource "aws_lambda_function" "guestbook-lambda" {
-  filename      = "../build/distributions/disruptive-guestbook-0.0.1-SNAPSHOT.zip"
+  filename      = "../build/distributions/function.zip"
   function_name = "guestbook-lambda"
   role          = aws_iam_role.guestbook-lambda-role.arn
   handler       = "com.example.disruptiveguestbook.lambda.Handler"
   source_code_hash = filebase64sha256(
-    "../build/distributions/disruptive-guestbook-0.0.1-SNAPSHOT.zip",
+    "../build/distributions/function.zip",
   )
-  runtime     = "java8"
+  runtime     = "provided"
   timeout     = 15
   memory_size = 2048
 }

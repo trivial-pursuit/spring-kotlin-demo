@@ -91,14 +91,3 @@ allOpen {
 shadowJar {
     mergeServiceFiles()
 }
-
-task buildZip(type: Zip) {
-    from sourceSets.main.output
-    into("lib") {
-        from configurations.compileClasspath
-        from configurations.runtimeClasspath
-    }
-}
-
-shadowJar.dependsOn buildZip
-
