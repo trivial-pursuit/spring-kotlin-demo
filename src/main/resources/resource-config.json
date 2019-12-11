@@ -1,0 +1,25 @@
+{
+  "resources":[
+    {"pattern":"META-INF/services/com.fasterxml.jackson.databind.Module"}, 
+    {"pattern":"META-INF/services/io.micronaut.context.env.PropertySourceLoader"}, 
+    {"pattern":"META-INF/services/io.micronaut.core.beans.BeanIntrospectionReference"}, 
+    {"pattern":"META-INF/services/io.micronaut.http.HttpResponseFactory"}, 
+    {"pattern":"META-INF/services/io.micronaut.inject.BeanConfiguration"}, 
+    {"pattern":"META-INF/services/io.micronaut.inject.BeanDefinitionReference"}, 
+    {"pattern":"META-INF/services/java.nio.file.spi.FileSystemProvider"}, 
+    {"pattern":"META-INF/services/kotlin.reflect.jvm.internal.impl.resolve.ExternalOverridabilityCondition"}, 
+    {"pattern":"META-INF/services/org.slf4j.spi.SLF4JServiceProvider"}, 
+    {"pattern":"application.yml"}, 
+    {"pattern":"logback.xml"},
+    {"pattern":"com/amazonaws/internal/config/awssdk_config_default.json"},
+    {"pattern":"com/amazonaws/partitions/endpoints.json"}, 
+    {"pattern":"com/amazonaws/sdk/versionInfo.properties"}, 
+    {"pattern":"kotlin/kotlin.kotlin_builtins"}, 
+    {"pattern":"mozilla/public-suffix-list.txt"}, 
+    {"pattern":"org/apache/http/client/version.properties"}, 
+    {"pattern":"org/joda/time/tz/data/Europe/Berlin"}, 
+    {"pattern":"org/joda/time/tz/data/ZoneInfoMap"}, 
+    {"pattern":"sun/net/idn/uidna.spp"}, 
+    {"pattern":"sun/text/resources/unorm.icu"}
+  ]
+}
