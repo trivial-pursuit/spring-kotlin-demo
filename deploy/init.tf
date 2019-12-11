@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     region = "eu-central-1"
-    bucket = "tbayer-micronaut-lambda-demo-tf-state"
+    bucket = "tognibeni-terraform"
     key    = "guestbook.json"
   }
 }
